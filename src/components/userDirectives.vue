@@ -1,7 +1,7 @@
 <template>
     <div>
         {{ str }}<br>
-        <input type="text" v-model="str" v-numder="str">
+        <input type="text" v-model="str" v-numder="str" v-focus>
     </div>
 </template>
 
