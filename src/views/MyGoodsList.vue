@@ -1,6 +1,24 @@
 <template>
   <div>
-    <MyTable :glist="list"></MyTable>
+    <MyTable :glist="list">
+      <template #header>
+      <th>#</th>
+      <th>商品名称</th>
+      <th>价格</th>
+      <th>标签</th>
+      <th>操作</th>
+    </template>
+    <template #tbody="scope">
+      <td>{{scope.row.id}}</td>
+      <td>{{scope.row.goods_name}}</td>
+      <td>{{scope.row.goods_price}}</td>
+      <td>{{scope.row.tags}}</td>
+      <td>
+        <button class="btn btn-danger btn-sm">删除</button>
+      </td>
+    </template>
+    </MyTable>
+    
   </div>
 </template>
 
