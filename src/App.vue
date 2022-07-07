@@ -1,20 +1,37 @@
 <template>
   <div>
-    <MyHeader title="购物车车" backgroundColor="pink"></MyHeader>
-    <MyGoods style="margin-top:45px" v-for="item in list" :key="item.id" :obj='item'></MyGoods>
-    <MyFooter></MyFooter>
+    <MyHeader title="tabbar" ></MyHeader>
+   <MyTabBar :arr='tabList'></MyTabBar>
+   <MyTable></MyTable>
   </div>
 </template>
 
 <script>
 import MyHeader from "./components/MyHeader.vue";
-import MyGoods from "./components/MyGoods.vue";
-import MyFooter from "./components/MyFooter.vue";
+import MyTabBar from "./components/MyTabBar.vue";
+import MyTable from "./components/MyTable.vue";
 
 export default {
   name:"App",
   data() {
     return {
+      tabList: [
+        {
+          iconText: "icon-shangpinliebiao",
+          text: "商品列表",
+          componentName: "MyGoodsList"
+        },
+        {
+          iconText: "icon-sousuo",
+          text: "商品搜索",
+          componentName: "MyGoodsSearch"
+        },
+        {
+          iconText: "icon-user",
+          text: "我的信息",
+          componentName: "MyUserInfo"
+        }
+      ],
       list:[]
     }
   },
@@ -28,8 +45,8 @@ export default {
   },
   components: {
     MyHeader,
-    MyGoods,
-    MyFooter
+    MyTabBar,
+    MyTable
   }
 };
 </script>
