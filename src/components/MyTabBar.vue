@@ -1,6 +1,6 @@
 <template>
   <div class="my-tab-bar">
-    <div class="tab-item" v-for="item in arr" :key="item.componentName">
+    <div class="tab-item" v-for="(item,index) in arr" :key="item.componentName" @click="clickFn(index)" :class="{current:index==currentIndex}">
       <!-- 图标 -->
       <span class="iconfont" :class="item.iconText"></span>
       <!-- 文字 -->
@@ -13,7 +13,7 @@
 export default {
  data() {
     return {
-      
+      currentIndex:0
     };
   },
   props:{
@@ -25,6 +25,11 @@ export default {
             }
             return false
         }
+    }
+  },
+  methods:{
+    clickFn(val) {
+        this.currentIndex=val
     }
   }
 };
@@ -46,6 +51,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor:pointer
   }
 }
 
