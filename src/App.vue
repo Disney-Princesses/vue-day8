@@ -1,20 +1,38 @@
 <template>
   <div>
-    <h1>自定义指令</h1>
-    <UseDirective></UseDirective>
+    <MyHeader title="购物车车" backgroundColor="pink"></MyHeader>
+    <MyGoods style="margin-top:45px" v-for="item in list" :key="item.id" :obj='item'></MyGoods>
+    <MyFooter></MyFooter>
   </div>
 </template>
 
 <script>
-// 引入自定义指令
-import UseDirective from './components/01.UseDirective'
+import MyHeader from "./components/MyHeader.vue";
+import MyGoods from "./components/MyGoods.vue";
+import MyFooter from "./components/MyFooter.vue";
+
 export default {
-components:{
-  UseDirective
-}
-}
+  name:"App",
+  data() {
+    return {
+      list:[]
+    }
+  },
+  created() {
+    this.$axios({
+      url: "/api/cart"
+    }).then(res => {
+      this.list=res.data.list
+      console.log(this.list);
+    });
+  },
+  components: {
+    MyHeader,
+    MyGoods,
+    MyFooter
+  }
+};
 </script>
 
 <style>
-
 </style>
