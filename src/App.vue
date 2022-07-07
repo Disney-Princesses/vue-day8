@@ -2,7 +2,7 @@
   <div>
     <MyHeader title="tabbar"></MyHeader>
     <div style="margin-top:45px">
-      <components :is="comName"></components>
+      <component :is="comName"></component>
     </div>
    <MyTabBar :arr='tabList' @toggleList='toggleListFn'></MyTabBar>
    <!-- <component :is="comName"></component> -->
@@ -39,7 +39,6 @@ export default {
           componentName: "MyUserInfo"
         }
       ],
-      list:[]
     }
   },
   created() {
