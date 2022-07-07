@@ -21,7 +21,7 @@
           >{{item}}</span>
         </td>
         <td>
-          <button class="btn btn-danger btn-sm">删除</button>
+          <button class="btn btn-danger btn-sm" @click="del(scope.row.id)">删除</button>
         </td>
       </template>
     </MyTable>
@@ -46,6 +46,12 @@ export default {
       console.log(res.data.data);
       this.list = res.data.data;
     });
+  },
+  methods: {
+    del(id) {
+      const index = this.list.findIndex(ele => ele.id == id);
+      this.list.splice(index, 1);
+    }
   }
 };
 </script>
