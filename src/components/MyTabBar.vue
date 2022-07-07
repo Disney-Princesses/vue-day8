@@ -1,19 +1,22 @@
 <template>
   <div class="my-tab-bar">
-    <div class="tab-item" v-for="(item,index) in arr" :key="item.componentName" @click="clickFn(index)" :class="{current:index==currentIndex}">
+    <div class="tab-item" v-for="(item,index) in arr" :key="item.componentName" @click="clickFn(index,item.componentName)" :class="{current:index==currentIndex}">
       <!-- 图标 -->
       <span class="iconfont" :class="item.iconText"></span>
       <!-- 文字 -->
       <span>{{item.text}}</span>
+      
     </div>
   </div>
 </template>
 
 <script>
+
+
 export default {
  data() {
     return {
-      currentIndex:0
+      currentIndex:0,
     };
   },
   props:{
@@ -28,10 +31,11 @@ export default {
     }
   },
   methods:{
-    clickFn(val) {
+    clickFn(val,name) {
         this.currentIndex=val
+        this.$emit('toggleList',name)
     }
-  }
+  },
 };
 </script>
 
