@@ -14,9 +14,23 @@ Vue.directive("focus", {
   },
 });
 
-// Vue.directive('person', {
-
-// })
+Vue.directive('person', {
+  inserted(el,bind){
+    // console.log(bind);
+    if(bind.value == 0){
+      el.style.display = 'none'
+    }else {
+      el.style.display = 'inline-block'
+    }
+  },
+  update(el,bind){
+    if(bind.value == 0){
+      el.style.display = 'none'
+    }else {
+      el.style.display = 'inline-block'
+    }
+  }
+})
 
 new Vue({
   render: (h) => h(App),

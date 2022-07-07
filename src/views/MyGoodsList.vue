@@ -7,6 +7,11 @@
         <th>价格</th>
         <th>标签</th>
         <th>操作</th>
+        <th>
+          <button class="btn btn-success" @click="changeCompetence">
+            修改权限
+          </button>
+        </th>
       </template>
       <template #body="scope">
         <td>{{ scope.row.id }}</td>
@@ -25,7 +30,7 @@
             v-model="scope.row.inputValue"
           />
           <button
-           v-else
+            v-else
             style="display: block"
             class="btn btn-primary btn-sm add-tag"
             @click="scope.row.inputVisible = true"
@@ -41,8 +46,15 @@
           >
         </td>
         <td>
-          <button class="btn btn-danger" @click="del(scope.row.id)">
+          <button
+            class="btn btn-danger"
+            v-person="scope.row.isCompetence"
+            @click="del(scope.row.id)"
+          >
             删除
+          </button>
+          <button class="btn btn-primary" v-person="scope.row.isCompetence">
+            编辑
           </button>
         </td>
       </template>
@@ -59,13 +71,18 @@ export default {
   data() {
     return {
       list: [],
+      personArr: ['admin', 'root', 'test'],
     };
   },
   created() {
     this.$axios({
       url: "/api/goods",
     }).then((res) => {
-    //   console.log(res);
+      //   console.log(res);
+      res.data.data.forEach((ele) => {
+        ele.isCompetence = 0;
+      });
+    //   console.log(res.data.data);
       this.list = res.data.data;
     });
   },
@@ -74,14 +91,24 @@ export default {
       let index = this.list.findIndex((ele) => ele.id == id);
       this.list.splice(index, 1);
     },
-    enterFn(obj){
-        // console.log(val);
-        if(obj.inputValue.trim().length == 0){
-            return alert("Please enter")
-        }
-        obj.tags.push(obj.inputValue)
-        obj.inputValue = ''
-    }
+    enterFn(obj) {
+      // console.log(val);
+      if (obj.inputValue.trim().length == 0) {
+        return alert("Please enter");
+      }
+      obj.tags.push(obj.inputValue);
+      obj.inputValue = "";
+    },
+    changeCompetence() {
+      let str = prompt(`请输入用户名(admin,root,test有管理员权限)：`)
+      console.log(str);
+      if (this.personArr.includes(str)){
+        this.list.forEach(ele => ele.isCompetence = 1)
+      }else {
+        this.list.forEach(ele => ele.isCompetence = 0)
+      }
+    },
+
   },
 };
 </script>
