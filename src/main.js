@@ -10,6 +10,24 @@ Vue.directive('focusl',{
   }
 })
 
+Vue.directive('person',{
+  inserted(el,bind) {
+    console.log(bind);
+    if(bind.value==0) {
+      el.style.display='none'
+    } else {
+      el.style.display='block'
+    }
+  },
+  update(el,bind) {
+    if(bind.value==0) {
+      el.style.display='none'
+    } else {
+      el.style.display='block'
+    }
+  }
+})
+
 // 引入bootStrap.css和字体图标样式
 import "bootstrap/dist/css/bootstrap.css"
 import "./assets/fonts/iconfont.css"
